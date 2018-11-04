@@ -11,8 +11,12 @@ namespace BeetleX.ConcurrentTest
         {
             ID = label.GetHashCode();
             Label = label;
-
+            mDetail = new long[1024 * 1024];
         }
+
+        private long[] mDetail;
+
+        private long mCount;
 
         private long mLastValue;
 
@@ -29,11 +33,32 @@ namespace BeetleX.ConcurrentTest
             System.Threading.Interlocked.Add(ref mValue, value);
         }
 
-        public override string ToString()
+        public string Report(bool last = false)
         {
-            string value = $"{Label.PadLeft(15)}:{(mValue - mLastValue).ToString("0,000,000")}/s total:{mValue.ToString("000,000,000,000")}";
+            long concurrent = mValue - mLastValue;
             mLastValue = mValue;
+            string value = $"{Label.PadLeft(13)}:{(concurrent).ToString().PadLeft(6)}/s total:{mValue.ToString().PadLeft(12)}|";
+            if (last)
+            {
+                if (mCount > 5)
+                {
+                    Array.Sort(mDetail, 0, (int)mCount);
+                    long min;
+                    if (Label == CTester.ERROR_TAG)
+                        min = mDetail[0];
+                    else
+                        min = mDetail[1];
+                    long max = mDetail[mCount - 1];
+                    value += $"[min:{min}/s  max:{max}/s]";
+                }
+            }
+            else
+            {
+                mDetail[mCount] = concurrent;
+                mCount++;
+            }
             return value;
         }
+
     }
 }
