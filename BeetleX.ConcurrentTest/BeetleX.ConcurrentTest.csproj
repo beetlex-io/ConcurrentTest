@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>0.1.0</Version>
+    <Authors>henryfan</Authors>
+    <Company>ikende.com</Company>
+    <Copyright>Copyright © ikende.com 2018 email:henryfan@msn.com</Copyright>
+    <PackageProjectUrl>https://github.com/IKende/ConcurrentTest</PackageProjectUrl>
+  </PropertyGroup>
+
+</Project>
