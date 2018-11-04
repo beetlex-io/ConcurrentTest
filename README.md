@@ -1,6 +1,6 @@
 # ConcurrentTest
 ### Install Packet
-`Install-Package BeetleX.ConcurrentTest -Version 0.1.0`
+`Install-Package BeetleX.ConcurrentTest -Version 0.2.0`
 ### Samples
 ```
     public class FastHttpClientTest
