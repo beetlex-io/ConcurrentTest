@@ -33,10 +33,9 @@
     }
 ```
 ```
-BeetleX.ConcurrentTest.CTester cTester = new BeetleX.ConcurrentTest.CTester();
-FastHttpClientTest fastHttpClient = new FastHttpClientTest();
-cTester.Run(5, fastHttpClient.Run);
-cTester.Report();
+            BeetleX.ConcurrentTest.CTester cTester = new BeetleX.ConcurrentTest.CTester();
+            FastHttpClientTest fastHttpClient = new FastHttpClientTest();
+            cTester.Run(20, fastHttpClient.Run, 1000000).ReportToConsole();
 ```
 ### Report
 ```
