@@ -25,9 +25,13 @@ namespace BeetleX.ConcurrentTest
         }
         public override string ToString()
         {
-            string time = $"[{Start}ms-{End}ms]";
+            string time = $"{Start}ms-{End}ms";
 
-            return $"{time.PadLeft(20)}:{Count.ToString("###,###,###,###,###")}";
+            return $"{time.PadLeft(15)}:[{Count.ToString("###,###,###,###,###").PadLeft(13)}]";
+        }
+        public void Clear()
+        {
+            mCount = 0;
         }
     }
 }
