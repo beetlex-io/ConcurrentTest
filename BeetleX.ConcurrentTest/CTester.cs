@@ -158,6 +158,8 @@ namespace BeetleX.ConcurrentTest
             Console.WriteLine("***********************************************************************");
             mOffsetTop = 1;
             mLastTop = Console.CursorTop;
+            for (int i = 0; i < 10; i++)
+                action();
             mPreppingThreads = mThreads;
             for (int i = 0; i < mThreads; i++)
             {
