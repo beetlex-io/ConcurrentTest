@@ -11,20 +11,20 @@
             clientApi = httpApiClient.CreateWebapi<IHttpClientApi>();
         }
         private string Host = "http://localhost:8007";
-        private BeetleX.FastHttpApi.HttpApiClient httpApiClient;
-        private IHttpClientApi clientApi;
+        private HttpApiClient httpApiClient;
+        private IEmployeeApi employeeApi;
         [CTestCase]
         public void AddEmployee()
         {
-            clientApi.AddEmployee(Employee.GetEmployee());
+            employeeApi.AddEmployee(Employee.GetEmployee());
         }
         [CTestCase]
         public void ListEmployees()
         {
-            clientApi.ListEmployees(2);
+            employeeApi.ListEmployees(2);
         }
         [JsonFormater]
-        public interface IHttpClientApi
+        public interface IEmployeeApi
         {
             [Get(Route = "api/employee/{count}")]
             List<Employee> ListEmployees(int count);
