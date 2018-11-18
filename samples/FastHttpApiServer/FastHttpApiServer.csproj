@@ -10,8 +10,4 @@
     <PackageReference Include="BeetleX.FastHttpApi" Version="1.0.1.8" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\BeetleX.ConcurrentTest\BeetleX.ConcurrentTest.csproj" />
-  </ItemGroup>
-
 </Project>

@@ -25,6 +25,7 @@ namespace BeetleX.ConcurrentTest
             AddRegion(5000, 10000);
             statisticTags.Add(new StatisticTag("Success"));
             statisticTags.Add(new StatisticTag("Error"));
+            Console.Clear();
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.AppendLine("***********************************************************************");
             sb.AppendLine($"* https://github.com/IKende/ConcurrentTest.git");
@@ -222,8 +223,38 @@ namespace BeetleX.ConcurrentTest
             System.Threading.Thread.Sleep(3000);
         }
 
+        private Action mTestAction;
+
+        private void OnThreadRun(object state)
+        {
+            while (true)
+            {
+                long runs = System.Threading.Interlocked.Increment(ref mRuns);
+                if (runs > mCount)
+                    System.Threading.Interlocked.Decrement(ref mRuns);
+                if (mCount == -1 || runs <= mCount)
+                {
+                    TestStatus testStatus = CreateStatus();
+                    try
+                    {
+                        mTestAction();
+                        testStatus.Success();
+                    }
+                    catch (Exception e_)
+                    {
+                        testStatus.Error();
+                        Console.WriteLine($"{e_.Message} {e_.StackTrace}");
+                    }
+                }
+                else
+                    break;
+            }
+        }
+
+
         public CTester Run(int thread, Action action, uint count, string testName)
         {
+            mTestAction = action;
             System.Threading.Thread.CurrentThread.Priority = System.Threading.ThreadPriority.Highest;
             mCount = count;
             mThreads = thread;
@@ -236,31 +267,7 @@ namespace BeetleX.ConcurrentTest
             OnPrepare(action);
             for (int i = 0; i < thread; i++)
             {
-                System.Threading.ThreadPool.QueueUserWorkItem(o =>
-                {
-                    while (true)
-                    {
-                        long runs = System.Threading.Interlocked.Increment(ref mRuns);
-                        if (runs > mCount)
-                            System.Threading.Interlocked.Decrement(ref mRuns);
-                        if (mCount == -1 || runs <= mCount)
-                        {
-                            TestStatus testStatus = CreateStatus();
-                            try
-                            {
-                                action();
-                                testStatus.Success();
-                            }
-                            catch (Exception e_)
-                            {
-                                testStatus.Error();
-                                Console.WriteLine($"{e_.Message} {e_.StackTrace}");
-                            }
-                        }
-                        else
-                            break;
-                    }
-                });
+                System.Threading.ThreadPool.QueueUserWorkItem(OnThreadRun);
             }
             return this;
         }

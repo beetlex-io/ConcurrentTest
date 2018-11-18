@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeetleX.ConcurrentTest", "B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{8A645E6F-A68D-41CB-BC81-FCE846A9FB97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestServer", "..\samples\TestServer\TestServer.csproj", "{9B3D8C28-79E2-4C13-B45A-0BA35C6E432E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreMvcServer", "..\samples\TestServer\CoreMvcServer.csproj", "{9B3D8C28-79E2-4C13-B45A-0BA35C6E432E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestClient", "..\samples\TestClient\TestClient.csproj", "{C3B51192-37B1-4DB7-AE62-36ACE03C28CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestClient", "..\samples\TestClient\TestClient.csproj", "{C3B51192-37B1-4DB7-AE62-36ACE03C28CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastHttpApiServer", "..\samples\FastHttpApiServer\FastHttpApiServer.csproj", "{E994387F-32B0-47E4-B62A-60E1E93038F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{C3B51192-37B1-4DB7-AE62-36ACE03C28CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3B51192-37B1-4DB7-AE62-36ACE03C28CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3B51192-37B1-4DB7-AE62-36ACE03C28CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E994387F-32B0-47E4-B62A-60E1E93038F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E994387F-32B0-47E4-B62A-60E1E93038F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E994387F-32B0-47E4-B62A-60E1E93038F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E994387F-32B0-47E4-B62A-60E1E93038F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,6 +42,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{9B3D8C28-79E2-4C13-B45A-0BA35C6E432E} = {8A645E6F-A68D-41CB-BC81-FCE846A9FB97}
 		{C3B51192-37B1-4DB7-AE62-36ACE03C28CF} = {8A645E6F-A68D-41CB-BC81-FCE846A9FB97}
+		{E994387F-32B0-47E4-B62A-60E1E93038F9} = {8A645E6F-A68D-41CB-BC81-FCE846A9FB97}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8060DDB3-CE6F-4BB1-A1CB-563B4412BABB}

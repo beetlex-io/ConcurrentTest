@@ -7,3 +7,8 @@ samples/TestClient/obj/
 samples/TestServer/Properties/
 samples/TestServer/bin/
 samples/TestServer/obj/
+samples/FastHttpApiServer/Properties/
+BeetleX.ConcurrentTest/.vs/
+samples/FastHttpApiServer/bin/
+samples/FastHttpApiServer/obj/
+samples/TestClient/Properties/

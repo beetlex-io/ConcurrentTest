@@ -1,25 +1,38 @@
-﻿using System;
+﻿using BeetleX.FastHttpApi;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 
-namespace TestServer.Controllers
+namespace FastHttpApiServer
 {
-    public class EmployeeController : ControllerBase
+    [BeetleX.FastHttpApi.Controller(BaseUrl = "Employee")]
+    class Program
     {
+        static HttpApiServer mApiServer;
 
-        public JsonResult Get(int count)
+        static void Main(string[] args)
+        {
+            mApiServer = new HttpApiServer();
+            mApiServer.ServerConfig.WriteLog = true;
+            mApiServer.ServerConfig.LogToConsole = true;
+            mApiServer.ServerConfig.Port = 8007;
+            mApiServer.ServerConfig.LogLevel = BeetleX.EventArgs.LogType.Warring;
+            mApiServer.ServerConfig.UrlIgnoreCase = true;
+            mApiServer.Register(typeof(Program).Assembly);
+            mApiServer.Open();
+            Console.Write(mApiServer.BaseServer);
+            Console.WriteLine(Environment.ProcessorCount);
+            Console.Read();
+        }
+        public object Get(int count)
         {
             return new JsonResult(Employee.GetEmployees(count));
         }
-        [HttpPost]
-        public JsonResult Add([FromBody]Employee value)
+        [Post]
+        public object Add(Employee item)
         {
-            return new JsonResult(value);
+            return new JsonResult(item);
         }
-
-        public JsonResult GetTime()
+        public object GetTime()
         {
             return new JsonResult(DateTime.Now);
         }

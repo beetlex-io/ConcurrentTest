@@ -9,7 +9,7 @@ namespace BeetleX.ConcurrentTest
     {
         public CTestCase()
         {
-
+            
         }
         internal object CaseObject { get; set; }
         public string Name { get; set; }

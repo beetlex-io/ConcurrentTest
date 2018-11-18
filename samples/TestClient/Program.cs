@@ -8,9 +8,12 @@ namespace TestClient
 {
     class Program
     {
+        //public static string Host = "http://172.16.0.8:8007";
+        public static string Host = "http://192.168.2.19:8007";
         static void Main(string[] args)
         {
-            CTester.RunTest<FastHttpClientTest>(10, 500000);
+            BeetleX.FastHttpApi.HttpClientPoolFactory.SetPoolSize(Host, 20, 50);
+            CTester.RunTest<FastHttpClientTest>(20, 1000000);
             Console.Read();
         }
     }
@@ -19,35 +22,41 @@ namespace TestClient
     {
         public FastHttpClientTest()
         {
-            httpApiClient = new HttpApiClient(Host);
+            httpApiClient = new HttpApiClient(Program.Host);
             clientApi = httpApiClient.CreateWebapi<IHttpClientApi>();
         }
 
-        private string Host = "http://localhost:8007";
-
         private BeetleX.FastHttpApi.HttpApiClient httpApiClient;
-
         private IHttpClientApi clientApi;
-
         [CTestCase]
         public void AddEmployee()
         {
-            clientApi.AddEmployee(Employee.GetEmployee());
+            clientApi.Add(Employee.GetEmployee());
         }
         [CTestCase]
         public void ListEmployees()
         {
-            clientApi.ListEmployees(2);
+            clientApi.Get(2);
+        }
+        [CTestCase]
+        public void GetTime()
+        {
+            clientApi.GetTime();
         }
 
         [JsonFormater]
+        [Controller(BaseUrl = "Employee")]
         public interface IHttpClientApi
         {
-            [Get(Route = "api/employee/{count}")]
-            List<Employee> ListEmployees(int count);
-            [Post(Route = "api/employee")]
-            Employee AddEmployee(Employee item);
+            [Get]
+            List<Employee> Get(int count);
+            [Post]
+            Employee Add(Employee item);
+            [Get]
+            DateTime GetTime();
         }
+
+
     }
     public class Employee
     {
